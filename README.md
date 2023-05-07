@@ -14,7 +14,7 @@ Selling is done when RSI drops below 75 and MA 200 is higher than the closing pr
 ### Install The requirements file
 
 ```sh
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 ```
 
 ## Download Data
