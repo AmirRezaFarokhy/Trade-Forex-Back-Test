@@ -12,6 +12,9 @@ A robot built to trade the gold market. Algorithm backtest for trading in the XA
 pip install -r requirements.txt
 ```
 
+## Download Data
+Download the data in the link below:
+https://forexsb.com/historical-forex-data
 
 
 
