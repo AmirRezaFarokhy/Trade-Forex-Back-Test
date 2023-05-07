@@ -172,11 +172,11 @@ class SetPosition:
 
     def Target_Point_MA(self, main_df, type_trade="Buy"):  # --> One Option and Tow 
         if type_trade=="Buy":
-            if main_df[f"MA{self.MA_target}"].iloc[self.search]>main_df["low"].iloc[self.search]:
+            if main_df[f"MA{self.MA_target}"].iloc[self.search+1]>main_df["low"].iloc[self.search+1]:
                 return True
                 
         else:
-            if main_df[f"MA{self.MA_target}"].iloc[self.search]<main_df["high"].iloc[self.search]:
+            if main_df[f"MA{self.MA_target}"].iloc[self.search+1]<main_df["high"].iloc[self.search+1]:
                 return True
         return None
 
