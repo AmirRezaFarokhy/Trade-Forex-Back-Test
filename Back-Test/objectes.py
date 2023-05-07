@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import talib
 
 
 class Indicators:
@@ -108,3 +109,100 @@ class SupportVSResistanced(Indicators):
         else:
             return False
             
+
+
+class PriceActionChandles:
+
+    def __init__(self, dataframe):
+        self.main_df = dataframe
+        self.chanles_pattern_name = []
+        self.count = 0
+
+    def Pin_Bar(self):
+        self.chanles_pattern_name.append("Pin_Bar")
+        self.count += 1
+        self.main_df["Pin_Bar"] = talib.CDLHAMMER(self.main_df["open"], self.main_df["high"], 
+                                                self.main_df["low"], self.main_df["close"]) 
+
+        return self.main_df, self.chanles_pattern_name
+
+    def piercing_line(self):
+        self.chanles_pattern_name.append("PiercingLine")
+        self.count += 1
+        self.main_df["PiercingLine"] = talib.CDLPIERCING(self.main_df["open"], self.main_df["high"], 
+                                                        self.main_df["low"], self.main_df["close"])
+        return self.main_df, self.chanles_pattern_name
+
+    def engolfing(self):
+        self.chanles_pattern_name.append("Engolfing")
+        self.count += 1
+        self.main_df["Engolfing"] = talib.CDLENGULFING(self.main_df["open"], self.main_df["high"], 
+                                                    self.main_df["low"], self.main_df["close"])
+
+        return self.main_df, self.chanles_pattern_name
+
+    def evening_star(self):
+        self.chanles_pattern_name.append("EveningStar")
+        self.count += 1
+        self.main_df["EveningStar"] = talib.CDLEVENINGSTAR(self.main_df["open"], self.main_df["high"], 
+                                    self.main_df["low"], self.main_df["close"])
+
+        return self.main_df, self.chanles_pattern_name
+
+    def dragonfly_doji(self):
+        self.chanles_pattern_name.append("DragonflyDoji")
+        self.count += 1
+        self.main_df["DragonflyDoji"] = talib.CDLDRAGONFLYDOJI(self.main_df["open"], 
+                                                               self.main_df["high"], 
+                                                               self.main_df["low"], 
+                                                               self.main_df["close"])
+        return  self.main_df, self.chanles_pattern_name
+
+    def grave_stone_doji(self):
+        self.chanles_pattern_name.append("GraveStoneDoji")
+        self.count += 1
+        self.main_df["GraveStoneDoji"] = talib.CDLGRAVESTONEDOJI(self.main_df["open"], 
+                                                               self.main_df["high"], 
+                                                               self.main_df["low"], 
+                                                               self.main_df["close"])
+        return  self.main_df, self.chanles_pattern_name
+
+    def three_line_strike(self):
+        self.chanles_pattern_name.append("three_line_strike")
+        self.count += 1
+        self.main_df["three_line_strike"] = talib.CDL3LINESTRIKE(self.main_df["open"], 
+                                                                 self.main_df["high"], 
+                                                                 self.main_df["low"], 
+                                                                 self.main_df["close"])	 
+        return self.main_df, self.chanles_pattern_name
+
+    def dark_cloud_cover(self):
+        self.chanles_pattern_name.append("dark_cloud_cover")
+        self.count += 1
+        self.main_df["dark_cloud_cover"] = talib.CDLDARKCLOUDCOVER(self.main_df["open"], 
+                                                                    self.main_df["high"], 
+                                                                    self.main_df["low"], 
+                                                                    self.main_df["close"])	 
+        return self.main_df, self.chanles_pattern_name
+
+    def tasukigap(self):
+        self.chanles_pattern_name.append("tasukigap")
+        self.count += 1
+        self.main_df["tasukigap"] = talib.CDLTASUKIGAP(self.main_df["open"], 
+                                                                 self.main_df["high"], 
+                                                                 self.main_df["low"], 
+                                                                 self.main_df["close"])	 
+        return self.main_df, self.chanles_pattern_name
+
+
+    def three_black_crow(self):
+        self.chanles_pattern_name.append("three_black_crow")
+        self.count += 1
+        self.main_df["three_black_crow"] = talib.CDL3BLACKCROWS(self.main_df["open"], 
+                                                                 self.main_df["high"], 
+                                                                 self.main_df["low"], 
+                                                                 self.main_df["close"])	 
+        return self.main_df, self.chanles_pattern_name
+
+
+
