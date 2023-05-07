@@ -3,6 +3,7 @@ A robot built to trade the gold market. Algorithm backtest for trading in the XA
 
 # Concept
 Buying is done when RSI drops below 25 and MA is 200 below the closing price.
+
 Selling is done when RSI drops below 75 and MA 200 is higher than the closing price.
 
 ## Result
