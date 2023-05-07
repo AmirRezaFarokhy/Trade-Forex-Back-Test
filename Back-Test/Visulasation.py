@@ -1,7 +1,9 @@
 import pandas as pd 
 import numpy as np 
 import matplotlib.pyplot as plt
+import os
 
+TICKER_NAME = "XAUUSD"
 
 class SaveBackTest:
 
@@ -20,7 +22,7 @@ class SaveBackTest:
 				bottom=np.min((o, c), axis=0))
 		plt.bar(d, height=h-l, width=0.3, color=color, bottom=l)
 
-	def VisulasationThreeSave(self, df, episodec):
+	def VisulasationThreeSave(self, df):
 
 		def chandlesPlots(d, o, h, l, c):
 			color = []
@@ -35,8 +37,6 @@ class SaveBackTest:
 					color=color, 
 					bottom=np.min((o, c), axis=0))
 			ax0.bar(d, height=h-l, width=0.3, color=color, bottom=l)	
-
-			
 		fig, (ax0, ax1) = plt.subplots(2, 1, 
 									gridspec_kw={'height_ratios': [3, 1]}, 
 									figsize=(24, 14))
@@ -46,7 +46,7 @@ class SaveBackTest:
 					df["close"])
 		ax0.plot(df["Upper_trendline"], label="Upper Trend Line")
 		ax0.plot(df["Lower_trendline"], label="Lower Trend Line")
-		ax0.set_title("XAUUSD")
+		ax0.set_title(TICKER_NAME)
 		ax0.set_xlabel("Index")
 		ax0.set_ylabel("Price")
 		ax0.legend(loc="lower left") 
@@ -55,32 +55,36 @@ class SaveBackTest:
 		up = [70.0 for i in range(len(df))]
 		ax1.plot(df.index, down, linestyle="--", c="black")
 		ax1.plot(df.index, up, linestyle="--", c="black")
-		ax1.set_title(f"XAUUSD RSI")
+		ax1.set_title(f"{TICKER_NAME} RSI")
 		ax1.set_xlabel("Index")
 		ax1.set_ylabel("RSI")
 		ax1.legend(loc="lower left") 
 		fig.tight_layout()
-		fig.savefig(f"img/{episode}.jpg")
-		fig.close()
+		if os.path.exists('img'):
+			fig.savefig(f"img/{episode}.jpg")
+		else:
+			os.path.mkdir("img")
+			fig.savefig(f"img/{episode}.jpg")
+			
 
 
-	def VisulasationTowSave(self, df): 
-		chandlesPlot(df.index, df["open"], 
+	def VisulasationTowSave(self, df, episode): 
+		self.chandlesPlot(df.index, df["open"], 
 					df["high"], df["low"], 
 					df["close"])
 		plt.scatter(df.index, df["Buy"] , color="g", linewidths=15, label="Buy")
 		plt.scatter(df.index, df["Sell"] , color="r", linewidths=15, label="Sell")
-		plt.hlines(y=upper, xmin=lines, xmax=len(df), label="Up", linestyles="-")
-		plt.hlines(y=lower, xmin=lines, xmax=len(df), label="Low", linestyles="-")
-		plt.hlines(y=real, xmin=lines, xmax=len(df), label="Soppurt vs Resistance")
-		plt.plot(df["MA50"], label="MA 50")
-		plt.title("XAUUSD")
+		plt.title(TICKER_NAME)
 		plt.xlabel("Index")
 		plt.ylabel("Price")
 		plt.legend(loc="lower left")  
-		plt.savefig(f"img/{episode}.jpg")
-		plt.close()
-	
+		if os.path.exists('img'):
+			plt.savefig(f"img/{episode}.jpg")
+			plt.close()
+		else:
+			os.path.mkdir("img")
+			plt.savefig(f"img/{episode}.jpg")
+			plt.close()
 
 
 	def VisulasationOneSave(self, df, episode):
@@ -89,23 +93,55 @@ class SaveBackTest:
 					df["close"])
 		plt.scatter(df.index, df["Buy"] , color="g", linewidths=15, label="Buy")
 		plt.scatter(df.index, df["Sell"] , color="r", linewidths=15, label="Sell")
-		plt.title("XAUUSD")
+		plt.plot(df.index, df["sl"], label="Stopp_Loss")
+		plt.title(TICKER_NAME)
 		plt.xlabel("Index")
 		plt.ylabel("Price")
 		plt.legend(loc="lower left")  
-		plt.savefig(f"img/{episode}.jpg")
-		plt.close()
+		if os.path.exists('img'):
+			plt.savefig(f"img/{episode}.jpg")
+			plt.close()
+		else:
+			os.path.mkdir("img")
+			plt.savefig(f"img/{episode}.jpg")
+			plt.close()
 
 
 	def VisulasationForTargetPoint(self, df, episode):
 		self.chandlesPlot(df.index, df["open"], 
-					df["high"], df["low"], 
-					df["close"])
-		plt.title("XAUUSD")
+			df["high"], df["low"], 
+			df["close"])
+		plt.scatter(df.index, df["Buy"] , color="g", linewidths=15, label="Buy")
+		plt.scatter(df.index, df["Sell"] , color="r", linewidths=15, label="Sell")
+		plt.plot(df.index, df["tp"], label="Trget_Point")
+		plt.title(TICKER_NAME)
 		plt.xlabel("Index")
 		plt.ylabel("Price")
 		plt.legend(loc="lower left")  
-		plt.savefig(f"img/{episode}.jpg")
-		plt.close()
-	
+		if os.path.exists('img'):
+			plt.savefig(f"img/{episode}.jpg")
+			plt.close()
+		else:
+			os.path.mkdir("img")
+			plt.savefig(f"img/{episode}.jpg")
+			plt.close()
 
+
+	def VisulasationForMA(self, df, episode, moving_averages_ma):
+		self.chandlesPlot(df.index, df["open"], 
+			df["high"], df["low"], 
+			df["close"])
+		#plt.scatter(df.index, df["Buy"] , color="g", linewidths=15, label="Buy")
+		#plt.scatter(df.index, df["Sell"] , color="r", linewidths=15, label="Sell")
+		#plt.plot(df.index, df[f"MA{moving_averages_ma}"], label="MATarget")
+		plt.title(TICKER_NAME)
+		plt.xlabel("Index")
+		plt.ylabel("Price")
+		plt.legend(loc="lower left")  
+		if os.path.exists('img'):
+			plt.savefig(f"img/{episode}.jpg")
+			plt.close()
+		else:
+			os.path.mkdir("img")
+			plt.savefig(f"img/{episode}.jpg")
+			plt.close()
