@@ -3,10 +3,12 @@ A robot built to trade the gold market. Algorithm backtest for trading in the XA
 
 # Concept
 the `back_test_algoritm_one.py`:
+
 Buying is done when RSI drops below 25 and MA is 200 below the closing price.
 Selling is done when RSI drops below 75 and MA 200 is higher than the closing price.
 
 the `back_test_algoritm_tow.py`:
+
 Using resistance support levels as well as getting confirmation using candlestick principles.
 
 ## Result
