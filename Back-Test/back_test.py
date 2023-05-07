@@ -25,8 +25,9 @@ SEARCH = -2
 EPSILON_FOR_TRENDLINE = 0.2
 MOVING_AVERAGE_TRENDLINE = 200
 TICKER_NAME = "XAUUSD"
+STOPP_POSITION_WITH_TIMES = 25
 
-df = pd.read_csv("XAUUSD_M5.csv")
+df = pd.read_csv("XAUUSD_H4.csv")
 
 df.index = [i for i in range(len(df))]
 
@@ -49,11 +50,15 @@ for indx in range(0, len(df)):
 	position_values = robot_trade.TrainRSI(MOVING_AVERAGE_TRENDLINE)
 	slice_df["Buy"] = np.NaN
 	slice_df["Sell"] = np.NaN
-	if position_values is not None:
+	if position_values=="Buy":
 		slice_df["Buy"].iloc[SEARCH] = slice_df["close"].iloc[SEARCH]
-		slice_df["Sell"].iloc[SEARCH] = slice_df["close"].iloc[SEARCH]
 		visulize.VisulasationOneSave(slice_df, episode)
 		visulize.VisulasationForTargetPoint(df.iloc[slice_df.index[0]:slice_df.index[-1]+25], episode+1)
+
+	elif position_values=="Sell":
+		slice_df["Sell"].iloc[SEARCH] = slice_df["close"].iloc[SEARCH]
+		visulize.VisulasationOneSave(slice_df, episode)
+		visulize.VisulasationForTargetPoint(df.iloc[slice_df.index[0]:slice_df.index[-1]+STOPP_POSITION_WITH_TIMES], episode+1)
 
 	episode += 1
 
