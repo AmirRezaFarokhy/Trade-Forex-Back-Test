@@ -122,7 +122,7 @@ class SaveBackTest:
 			plt.savefig(f"img/{episode}.jpg")
 			plt.close()
 		else:
-			os.path.mkdir("img")
+			os.mkdir("img")
 			plt.savefig(f"img/{episode}.jpg")
 			plt.close()
 
