@@ -63,7 +63,7 @@ class SaveBackTest:
 		if os.path.exists('img'):
 			fig.savefig(f"img/{episode}.jpg")
 		else:
-			os.path.mkdir("img")
+			os.mkdir("img")
 			fig.savefig(f"img/{episode}.jpg")
 			
 
@@ -82,7 +82,7 @@ class SaveBackTest:
 			plt.savefig(f"img/{episode}.jpg")
 			plt.close()
 		else:
-			os.path.mkdir("img")
+			os.mkdir("img")
 			plt.savefig(f"img/{episode}.jpg")
 			plt.close()
 
@@ -102,7 +102,7 @@ class SaveBackTest:
 			plt.savefig(f"img/{episode}.jpg")
 			plt.close()
 		else:
-			os.path.mkdir("img")
+			os.mkdir("img")
 			plt.savefig(f"img/{episode}.jpg")
 			plt.close()
 
@@ -142,6 +142,6 @@ class SaveBackTest:
 			plt.savefig(f"img/{episode}.jpg")
 			plt.close()
 		else:
-			os.path.mkdir("img")
+			os.mkdir("img")
 			plt.savefig(f"img/{episode}.jpg")
 			plt.close()
